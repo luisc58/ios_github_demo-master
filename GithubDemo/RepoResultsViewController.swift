@@ -1,25 +1,17 @@
-//
-//  ViewController.swift
-//  GithubDemo
-//
-//  Created by Nhan Nguyen on 5/12/15.
-//  Copyright (c) 2015 codepath. All rights reserved.
-//
+
 
 import UIKit
 import MBProgressHUD
 
-// Main ViewController
-
-
-class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-@IBOutlet weak var tableView: UITableView!
+class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SettingsPresentingViewControllerDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var desLabel: UILabel!
     
     var searchBar: UISearchBar!
     var searchSettings = GithubRepoSearchSettings()
-
-    @IBOutlet weak var desLabel: UILabel!
     var repos: [GithubRepo]!
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +23,11 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
         // Add SearchBar to the NavigationBar
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
-
-        // Perform the first search when the view controller first loads
+        
         doSearch()
     }
+    
+
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (repos != nil) { return repos.count} else { return 0}
@@ -55,17 +48,32 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
        
     cell.descriptionLabel.text = name
     cell.title.text = description
-    cell.star.text = "\(star)"
+    cell.star.text = "\(star)" // If star is greater than minimum, edit this <<<<<< =========
     cell.fork.text = "\(fork)"
     cell.icon.setImageWith(icon!)
     cell.userName.text = user
         
-        
-        
         return cell
     }
     
-
+    
+    func didSaveSettings(settings: GithubRepoSearchSettings) {
+        
+        searchSettings.minStars = settings.minStars //problem is here 
+        dismiss(animated: true, completion: nil)
+        doSearch()
+    }
+    
+    func didCancelSettings() {
+        print("cancel")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navController = segue.destination as! UINavigationController
+        let vc = navController.topViewController as! SettingsViewController
+        vc.settings = searchSettings
+        vc.delegate = self
+    }
 
     // Perform the search.
     fileprivate func doSearch() {
@@ -90,10 +98,10 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
             }, error: { (error) -> Void in
                 print(error!)
         })
-        
-        
     }
 }
+
+
 
 
 

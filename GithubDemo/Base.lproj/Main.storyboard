@@ -160,7 +160,13 @@
                             <constraint firstAttribute="trailing" secondItem="Jf8-1W-ITZ" secondAttribute="trailing" id="k4U-1f-Bbp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="x5q-EH-pP8"/>
+                    <navigationItem key="navigationItem" id="x5q-EH-pP8">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="Zy6-J8-FuU">
+                            <connections>
+                                <segue destination="dkf-Dh-MdV" kind="presentation" id="joL-bB-heQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Jf8-1W-ITZ" id="ISO-EN-0Fz"/>
                     </connections>
@@ -168,6 +174,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818.39999999999998" y="-558.17091454272872"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="JnP-Jk-9hu">
+            <objects>
+                <viewController id="Kkl-2p-rT2" customClass="SettingsViewController" customModule="GithubDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t2J-qn-S3M"/>
+                        <viewControllerLayoutGuide type="bottom" id="a7R-4o-iFi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dWn-w1-U3V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="tqB-qW-v6A">
+                                <rect key="frame" x="143" y="102" width="159" height="31"/>
+                                <connections>
+                                    <action selector="sliderAction:" destination="Kkl-2p-rT2" eventType="valueChanged" id="bxU-hT-eFu"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimun stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2V-S7-FaR">
+                                <rect key="frame" x="4" y="107" width="115" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="Gfr-33-j23"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxy-cb-nQE">
+                                <rect key="frame" x="347" y="106" width="12" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dxy-cb-nQE" firstAttribute="leading" secondItem="tqB-qW-v6A" secondAttribute="trailing" constant="47" id="0Tz-3m-KbH"/>
+                            <constraint firstItem="L2V-S7-FaR" firstAttribute="leading" secondItem="dWn-w1-U3V" secondAttribute="leading" constant="4" id="84L-sD-tyP"/>
+                            <constraint firstItem="L2V-S7-FaR" firstAttribute="centerY" secondItem="tqB-qW-v6A" secondAttribute="centerY" id="BAO-9V-dQe"/>
+                            <constraint firstItem="L2V-S7-FaR" firstAttribute="centerY" secondItem="Dxy-cb-nQE" secondAttribute="centerY" id="IwK-xT-xOg"/>
+                            <constraint firstItem="Dxy-cb-nQE" firstAttribute="leading" secondItem="tqB-qW-v6A" secondAttribute="trailing" constant="47" id="MYM-mv-Lcf"/>
+                            <constraint firstItem="tqB-qW-v6A" firstAttribute="leading" secondItem="L2V-S7-FaR" secondAttribute="trailing" constant="26" id="fPL-IV-mdO"/>
+                            <constraint firstItem="tqB-qW-v6A" firstAttribute="top" secondItem="t2J-qn-S3M" secondAttribute="bottom" constant="38" id="lEn-z0-sal"/>
+                            <constraint firstItem="Dxy-cb-nQE" firstAttribute="trailing" secondItem="dWn-w1-U3V" secondAttribute="trailingMargin" id="srD-mX-hHG"/>
+                            <constraint firstItem="tqB-qW-v6A" firstAttribute="leading" secondItem="L2V-S7-FaR" secondAttribute="trailing" constant="26" id="y8N-oD-aff"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="WU2-kC-S5n">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="kLt-5A-zds">
+                            <connections>
+                                <action selector="cancel:" destination="Kkl-2p-rT2" id="zLU-Ay-ese"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="JRT-cu-IFQ">
+                            <connections>
+                                <action selector="save:" destination="Kkl-2p-rT2" id="Ip5-RB-I7N"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="slider" destination="tqB-qW-v6A" id="9SW-ay-Qbu"/>
+                        <outlet property="sliderValue" destination="Dxy-cb-nQE" id="Usl-eF-Zn0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLg-TO-bzm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2649" y="-558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FpP-oR-azb">
@@ -186,6 +260,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dru-y2-L7C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="-557"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Els-d8-nu1">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="osw-NL-EpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dkf-Dh-MdV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iCD-ab-ODj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Kkl-2p-rT2" kind="relationship" relationship="rootViewController" id="vSP-Ze-zkS"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1758" y="-557"/>
         </scene>
     </scenes>
     <resources>

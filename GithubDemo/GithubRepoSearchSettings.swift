@@ -8,8 +8,8 @@
 
 import Foundation
 
-// Model class that represents the user's search settings
-class GithubRepoSearchSettings {
+
+struct GithubRepoSearchSettings {
     var searchString: String?
     var minStars = 0
     

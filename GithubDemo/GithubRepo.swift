@@ -29,7 +29,7 @@ class GithubRepo: CustomStringConvertible {
             self.name = name
         }
         
-        if let stars = jsonResult["stargazers_count"] as? Int? {
+        if let stars = jsonResult["stargazers_count"] as? Int? {  
             self.stars = stars
         }
         
